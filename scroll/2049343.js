@@ -1,0 +1,35 @@
+//救世飾品魔
+function start(equip) {
+    var MatkRandom = cm.getRandom(1, 100);
+    var MatkRise = 0;
+          if(MatkRandom >=  1 && MatkRandom <=  35){MatkRise = 10
+    }else if(MatkRandom >= 36 && MatkRandom <=  65){MatkRise = 11
+    }else if(MatkRandom >= 66 && MatkRandom <=  80){MatkRise = 12
+    }else if(MatkRandom >= 81 && MatkRandom <=  88){MatkRise = 13
+    }else if(MatkRandom >= 89 && MatkRandom <=  95){MatkRise = 14
+    }else if(MatkRandom >= 96 && MatkRandom <= 100){MatkRise = 15
+    }
+    equip.setMatk(equip.getMatk() + MatkRise);
+    cm.getPlayer().dropMessage(6, "魔法攻擊力提升了" + MatkRise + "點");
+    return true;
+}
+function handleExecute(equip) {
+    if(equip.getUpgradeSlots() < 1) {
+        return false;
+    }else if(!(equip.getItemId() >= 1010000 && equip.getItemId() <= 1039999 || equip.getItemId() >= 1110000 && equip.getItemId() <= 1149999 || 
+    equip.getItemId() >= 1340000 && equip.getItemId() <= 1349999)){
+        cm.getPlayer().dropMessage(6, "僅能使用在飾品上");
+        return false;
+    }
+return true;
+}
+
+// return false代表強制不使用祝福卷軸，可防呆/也可強制某卷軸不能使用WS，刪除function或預設為return true(會使用祝福)
+function handleWhiteScroll(equip) {
+    return true;
+}
+
+// return false的話不會消耗捲次(會排除消耗捲次判定)
+function handleUpgradeSlot(equip) {
+    return true;
+}

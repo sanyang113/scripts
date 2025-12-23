@@ -1,0 +1,38 @@
+function start() {
+    // 放入可補充的飛鏢，不存在物品不能放入 不然會斷線
+    items.add(2070000);
+    items.add(2070001);
+    items.add(2070002);
+    items.add(2070003);
+    items.add(2070004);
+    items.add(2070005);
+    items.add(2070006);
+    items.add(2070007);
+    items.add(2070008);
+    items.add(2070009);
+    items.add(2070010);
+    items.add(2070011);
+    items.add(2070012);
+    items.add(2070013);
+    items.add(2070018);
+    items.add(2070019);
+    items.add(2070020);
+    items.add(2070021);
+    items.add(2070022);
+    items.add(2070023);
+    items.add(2070024);
+    items.add(2070026);
+    items.add(2330000);
+    items.add(2330001);
+    items.add(2330002);
+    items.add(2330003);
+    items.add(2330004);
+    items.add(2330005);
+    items.add(2330007);
+    items.add(2330008);
+    items.add(2330009);
+    items.add(2330012);
+    items.add(2330013);
+    items.add(2331000);
+    items.add(2332000);
+}

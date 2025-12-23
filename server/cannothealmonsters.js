@@ -1,0 +1,21 @@
+//不治癒怪物
+function start() {
+    mobs.add(8810099);
+    mobs.add(9400407);
+    mobs.add(6230101);
+    mobs.add(6300003);
+    mobs.add(6300004);
+    mobs.add(6400003);
+    mobs.add(6400004);
+    mobs.add(6130104);
+    mobs.add(8510100);
+    mobs.add(8500003);
+    mobs.add(8500004);
+    mobs.add(9420523);
+    mobs.add(9420524);
+    mobs.add(8810019);
+    mobs.add(8810020);
+    mobs.add(8810021);
+    mobs.add(8810022);
+    mobs.add(8810023);
+}

@@ -1,0 +1,9 @@
+//奧芙赫班入場券合成
+
+function start() {
+    cm.openNpc(9401434, "[遠征]奧芙赫班入場券合成");
+}
+
+function checkUse() {
+    return false;
+}

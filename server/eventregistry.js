@@ -1,0 +1,56 @@
+function start() {
+    //設定副本註冊(squad + event)
+    event.register("BossBalrog", 105100300);
+    event.register("ZakumBattle", 280030000, 280030100);
+    event.register("HorntailBattle", 240060000, 240060100, 240060200);
+    event.register("ChaosZakum", 280030001);
+    event.register("ChaosHorntail", 240060201);
+    event.register("PinkBeanBattle", 270050100);
+    event.register("NamelessMagicMonster", 802000111);
+    event.register("Vergamot", 802000211);
+    event.register("tokyo_2095", 802000311);
+    event.register("Dunas", 802000411);
+    event.register("Nibergen", 802000611);
+    event.register("Dunas2", 802000711);
+    event.register("CoreBlaze", 802000801, 802000802, 802000803);
+    event.register("Aufhaven", 802000821, 802000823);
+    event.register("VonLeonBattle", 211070100, 211070101, 211070110);
+    event.register("ScarTarBattle", 551030200);
+    event.register("CygnusBattle", 271040100);
+    event.register("HillaBattle", 262030300);
+    event.register("DarkHillaBattle", 262031300);
+    event.register("ArkariumBattle", 272020110, 272030400);
+    event.register("AswanOffSeason", 955000100, 955000200, 955000300);
+    event.register("ToadKing", 800040410);
+    event.register("Akayile", 272020200);
+    event.register("PinkZakum", 689013000);
+    event.register("0AllBoss", 703200400);
+    event.register("TimeKing", 220080001);
+    event.register("TreeKing", 541020800);
+    event.register("CWKPQ", 610030600);
+    event.register("UnderWorld", 801040100);
+    event.register("ChaosTimeKing", 220080100);
+    event.register("FishKing", 230040420);
+
+    squad.register("bossbalrog", 105100300);
+    squad.register("zak", 280030000);
+    squad.register("chaoszak", 280030001);
+    squad.register("horntail", 240060000, 240060100, 240060200);
+    squad.register("chaosht", 240060201);
+    squad.register("pinkbean", 270050100);
+    squad.register("nmm_squad", 802000111);
+    squad.register("vergamot", 802000211);
+    squad.register("dunas", 802000411);
+    squad.register("nibergen_squad", 802000611);
+    squad.register("dunas2", 802000711);
+    squad.register("core_blaze", 802000801, 802000802, 802000803);
+    squad.register("aufheben", 802000821, 802000823);
+    squad.register("vonleon", 211070100, 211070101, 211070110);
+    squad.register("scartar", 551030200);
+    squad.register("cygnus", 271040100);
+    squad.register("tk", 800040410);
+    squad.register("tak", 220080001);
+    squad.register("trk", 541020800);
+    squad.register("ud", 801040100);
+    squad.register("fish", 230040420);
+}

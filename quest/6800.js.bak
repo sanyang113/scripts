@@ -1,0 +1,13 @@
+﻿var status = -1;
+
+var objDate = new Date();
+
+function start(mode, type, selection) {
+    qm.forceStartQuest();
+    qm.dispose();
+}
+
+function end(mode, type, selection) {
+    qm.teachSkill(1005,1,1);
+    qm.forceCompleteQuest();
+}

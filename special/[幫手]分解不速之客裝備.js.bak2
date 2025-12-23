@@ -1,0 +1,161 @@
+var status = -1;
+var sel = -1;
+var selType = -1;
+var pos = -1;
+
+var start = -1;
+var end = -1;
+var normal = true;
+
+var items = [
+    [1302143, 4030002, 4030002],
+    [1099001, 4030002, 4030002],
+    [1098000, 4030002, 4030002],
+    [1302333, 4030002, 4030002],
+    [1312199, 4030002, 4030002],
+    [1322250, 4030002, 4030002],
+    [1332274, 4030002, 4030002],
+    [1372222, 4030002, 4030002],
+    [1382259, 4030002, 4030002],
+    [1372039, 4030002, 4030002],
+    [1372040, 4030002, 4030002],
+    [1372041, 4030002, 4030002],
+    [1372042, 4030002, 4030002],
+    [1402251, 4030002, 4030002],
+    [1412177, 4030002, 4030002],
+    [1422184, 4030002, 4030002],
+    [1432214, 4030002, 4030002],
+    [1442268, 4030002, 4030002],
+    [1452252, 4030002, 4030002],
+    [1462239, 4030002, 4030002],
+    [1472261, 4030002, 4030002],
+    [1482216, 4030002, 4030002],
+    [1492231, 4030002, 4030002],
+];
+
+function start() {
+    action(1,0,0);
+}
+
+function action(mode, type, selection) {
+    
+    if (mode == 1) {
+        status++;
+    } else if (mode == 0) {
+        cm.dispose();
+        return;
+    } else {
+        cm.dispose();
+        return;
+    }
+
+    switch(status) {
+        case 0:
+            var msg = "如果你有不要的裝備可以跟我交換豐裕牌組唷！\r\n";
+            msg += "您想要交換什麼呢？\r\n\r\n";
+            for(var i = 0; i < items.length; i++) {
+                msg += "#L" + i + "##b#i" + items[i][0] + ":##t" + items[i][0] + "##k\r\n";
+            }
+            msg += "#L999##r#e我要批量回收以上所有裝備#k#n\r\n";
+            cm.sendNext(msg);
+            break;
+        case 1:
+            sel = selection;
+            if(sel == 999) {
+                cm.dispose();
+                cm.openNpc(cm.getNpc(),"回收所有航海師武器");
+                return;
+            }
+            var msg = "您選擇了#b#i" + items[sel][0] + ":##t" + items[sel][0] +"##k，請選擇分解方式\r\n\r\n";
+            msg += "#L0##b我要單選一件裝備進行分解\r\n";
+            msg += "#L1##b我要進行批量分解\r\n";
+            cm.sendNext(msg);
+            break;
+        case 2:
+            selType = selection;
+            if(selType == 0) {
+                var msg = "請選擇您要分解的裝備(可用裝備已排序)\r\n\r\n";
+                var result = cm.selectEquipment(items[sel][0]);
+                if(result == null) {
+                    cm.sendOk("很抱歉，您沒有#b#i" + items[sel][0] + ":##t" + items[sel][0] + "##k唷！");
+                    cm.dispose();
+                    return;
+                }
+                cm.sendNext(msg + result);
+            } else {
+                var msg = "您選擇了分解#b#i" + items[sel][0] + ":##t" + items[sel][0] + "##k\r\n";
+                msg += "若剩餘卷次為標準卷次或以上且強化加值為0可分解成#b#i" + items[sel][1] + ":##t" + items[sel][1] + "##k\r\n";
+                msg += "若不是則分解成#b#i" + items[sel][2] + ":##t" + items[sel][2] + "##k\r\n";
+                msg += "請選擇您想要從第幾個欄位開始分解(背包編號為1~96)";
+                cm.sendGetNumber(msg, 1, 1, 96);
+            }
+            break;
+        case 3:
+            if(selType == 0) {
+                pos = selection;
+                var msg = "此裝備可以交換"
+                var item = cm.getItem(1, selection);
+                if(item.getUpgradeSlots() >= cm.getStandardUpgradeSlots(items[sel][0]) && item.getLevel() == 0) {
+                    msg += "#b#i" + items[sel][1] + ":##t" + items[sel][1] + "##k";
+                } else {
+                    msg += "#b#i" + items[sel][2] + ":##t" + items[sel][2] + "##k";
+                    normal = false;
+                }
+                cm.sendYesNo(msg + "\r\n您確定要交換嗎？");
+            } else {
+                start = selection;
+                var msg = "請選擇結束位置";
+                cm.sendGetNumber(msg, 1, 1, 96);
+            }
+            break;
+        case 4:
+            if(selType == 0) {
+                if(!cm.canHold(normal ? items[sel][1] : items[sel][2], 1)) {
+                    cm.sendOk("請確認背包空間是否足夠");
+                    cm.dispose();
+                    return;
+                }
+
+                cm.removeEquipmentFromSlot(pos);
+                cm.gainItem(normal ? items[sel][1] : items[sel][2], 1);
+                cm.sendOk("幫您兌換完成囉，請收好！");
+                cm.dispose();
+                return;
+            } else {
+                end = selection;
+                var msg = "您選擇從第" + start + "批量分解到" + end + "格欄位，一但確認則不可反悔\r\n";
+                msg += "若剩餘卷次為標準卷次或以上且強化加值為0可分解成#b#i" + items[sel][1] + ":##t" + items[sel][1] + "##k\r\n";
+                msg += "若不是則分解成#b#i" + items[sel][2] + ":##t" + items[sel][2] + "##k\r\n";
+                msg += "#r#e※請再次確認需要用到的裝備是否都已經放到倉庫去了！！！ 分解錯誤不補償！！！#k#n\r\n\r\n";
+                msg += "您確定要分解嗎？";
+                cm.sendYesNo(msg);
+            }
+            break;
+        case 5:
+            if(selType == 1) {
+                var check = [];
+                check.push([items[sel][1], 1]);
+                check.push([items[sel][2], 1]);
+
+                if(!cm.canHold(check)) {
+                    cm.sendOk("為避免異常，請確認背包空間是否有兩格以上！");
+                    cm.dispose();
+                    return;
+                }
+                var result = cm.exchangeToStackedDeck(items[sel][0], start, end);
+                cm.gainItem(items[sel][1], result[0]);
+                cm.gainItem(items[sel][2], result[1]);
+                
+                var msg = "兌換完成了，兌換內容如下\r\n";
+                msg += "#b#i" + items[sel][1] + ":##t" + items[sel][1] + "##k x" + result[0] + "張\r\n";
+                msg += "#b#i" + items[sel][2] + ":##t" + items[sel][2] + "##k x" + result[1] + "張\r\n";
+
+                cm.sendOk(msg);
+                cm.dispose();
+                return;
+            }
+        default:
+            cm.dispose();
+            return;
+    }
+}
