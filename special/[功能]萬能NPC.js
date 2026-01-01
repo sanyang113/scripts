@@ -95,7 +95,7 @@ function action(mode, type, selection) {
                         append += '  ';
                     }
                 }
-                msg += "#L" + i + "##i" + icons[i] + "##b" + append;
+                msg += "#L" + i + "##i" + /*icons[i] +*/ "##b" + append;
                 count++;
                 if(count >= 2) {
                     msg += "\r\n";
