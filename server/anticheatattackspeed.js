@@ -162,7 +162,7 @@ function start() {
 
     skill.put(1311006, 1200);
 
-    skill.put(4221007, 1240);
+    skill.put(4221007, 500);
     skill.put(4121008, 1240);
 
     skill.put(2111003, 1200);
